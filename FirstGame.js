@@ -5,22 +5,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
     choices.forEach(choice => {
         choice.addEventListener("click", function() {
-            const playerOne = this.id; // 'rock', 'paper', or 'scissors'
-            const computerChoice = Math.floor(Math.random() * 3); // 0, 1, or 2
+            const playerOne = this.id;
+            const computerChoice = Math.floor(Math.random() * 3); 
             const computer = computerChoice === 0 ? "rock" : computerChoice === 1 ? "paper" : "scissors";
 
-            let result =
-                playerOne === computer
-                    ? "🤝 It's a Tie!"
-                    : `${this.innerText} beats ${computer === 'rock' ? '🪨 Rock' : computer === 'paper' ? '📄 Paper' : '✂️ Scissors'} => ${
-                        (playerOne === "rock" && computer === "scissors") ||
-                        (playerOne === "paper" && computer === "rock") ||
-                        (playerOne === "scissors" && computer === "paper")
-                            ? "🎉 Player wins!"
-                            : "👾 Computer wins!"
-                    }`;
+            let resultMessage;
+            let winnerMessage;
 
-            resultDiv.textContent = result;
+           
+            if (playerOne === computer) {
+                resultMessage = `🤝 It's a Tie!`;
+                winnerMessage = "";
+            } else if (
+                (playerOne === "rock" && computer === "scissors") ||
+                (playerOne === "paper" && computer === "rock") ||
+                (playerOne === "scissors" && computer === "paper")
+            ) {
+                resultMessage = `${this.innerText} beats ${computer === 'rock' ? '🪨 Rock' : computer === 'paper' ? '📄 Paper' : '✂️ Scissors'}`;
+                winnerMessage = "🎉 Player wins!";
+            } else {
+                resultMessage = `${this.innerText} is beaten by ${computer === 'rock' ? '🪨 Rock' : computer === 'paper' ? '📄 Paper' : '✂️ Scissors'}`;
+                winnerMessage = "👾 Computer wins!";
+            }
+
+            
+            resultDiv.textContent = resultMessage + " " + winnerMessage;
             playAgainButton.classList.remove("hidden");
         });
     });
