@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
     choices.forEach(choice => {
         choice.addEventListener("click", function() {
             const playerOne = this.id;
-            const computerChoice = Math.floor(Math.random() * 3); 
+            const computerChoice = Math.floor(Math.random() * 3);
             const computer = computerChoice === 0 ? "rock" : computerChoice === 1 ? "paper" : "scissors";
 
             let resultMessage;
             let winnerMessage;
 
-           
+
             if (playerOne === computer) {
                 resultMessage = `🤝 It's a Tie!`;
                 winnerMessage = "";
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 winnerMessage = "👾 Computer wins!";
             }
 
-            
+           
             resultDiv.textContent = resultMessage + " " + winnerMessage;
             playAgainButton.classList.remove("hidden");
         });
